@@ -18,9 +18,9 @@ vector<triunghi> triangulate(vector<Point2D> Polygon, vector<Point2D> Concaves)
 
 	int n = Polygon.size();
 
-	while (Polygon.size() > 3)
+	while (Polygon.size() > 2)
 	{
-		for (size_t i = 0; i < n ; ++i) {
+		for (size_t i = 0; i < n; ++i) {
 			//varf convex
 			if (orientation(Polygon[(i - 1 + n) % n], Polygon[i], Polygon[(i + 1) % n]) > 0)
 			{
@@ -55,14 +55,15 @@ vector<triunghi> triangulate(vector<Point2D> Polygon, vector<Point2D> Concaves)
 					//sterge varf taiat
 					Polygon.erase(Polygon.begin() + i);
 					n--;
+
+					if (n < 3)
+						break;
 				}
 			}
 		}
 
 		//elimin
 	}
-
-	rez.push_back({ Polygon[0], Polygon[1], Polygon[2] });
 
 	return rez;
 }
