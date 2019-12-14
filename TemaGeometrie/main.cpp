@@ -20,14 +20,14 @@ vector<triunghi> triangulate(vector<Point2D> Polygon, vector<Point2D> Concaves)
 
 	while (Polygon.size() > 3)
 	{
-		for (size_t i = 0; i < n; ++i) {
+		for (size_t i = 0; i < n ; ++i) {
 			//varf convex
-			if (orientation(Polygon[(i - 1) % n], Polygon[i], Polygon[(i + 1) % n]) > 0)
+			if (orientation(Polygon[(i - 1 + n) % n], Polygon[i], Polygon[(i + 1) % n]) > 0)
 			{
 				bool valid = true;
 				//verificare nu contine varf concav
 				for (Point2D point : Concaves)
-					if (isInside(Polygon[(i - 1) % n], Polygon[i], Polygon[(i + 1) % n], point))
+					if (isInside(Polygon[(i - 1 + n) % n], Polygon[i], Polygon[(i + 1) % n], point))
 					{
 						valid = false;
 						break;
@@ -36,18 +36,18 @@ vector<triunghi> triangulate(vector<Point2D> Polygon, vector<Point2D> Concaves)
 				if (valid)
 				{
 					//avem nou triunghi
-					rez.push_back({ Polygon[(i - 1) % n], Polygon[i], Polygon[(i + 1) % n] });
+					rez.push_back({ Polygon[(i - 1 + n) % n], Polygon[i], Polygon[(i + 1) % n] });
 					//TODO: desenam diagonala
 
 					//verificare vecini daca sunt convexi
 					auto it = find(Concaves.begin(), Concaves.end(), Polygon[(i - 1) % n]);
-					if (it != Concaves.end() && orientation(Polygon[(i - 2) % n], Polygon[(i - 1) % n], Polygon[(i + 1) % n]) > 0)
+					if (it != Concaves.end() && orientation(Polygon[(i - 2 + n) % n], Polygon[(i - 1 + n) % n], Polygon[(i + 1) % n]) > 0)
 					{
 							Concaves.erase(it);
 					}
 
 					it = find(Concaves.begin(), Concaves.end(), Polygon[(i + 1) % n]);
-					if (it != Concaves.end() && orientation(Polygon[(i - 1) % n], Polygon[(i + 1) % n], Polygon[(i + 2) % n]) > 0)
+					if (it != Concaves.end() && orientation(Polygon[(i - 1 + n) % n], Polygon[(i + 1) % n], Polygon[(i + 2) % n]) > 0)
 					{
 							Concaves.erase(it);
 					}
