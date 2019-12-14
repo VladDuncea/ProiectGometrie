@@ -10,6 +10,11 @@ Point2D Point2D::operator=(const Point2D& Obj) {
 	return *this;
 }
 
+bool Point2D::operator==(const Point2D& Obj)
+{
+	return (Obj.X == X && Obj.Y == Y);
+}
+
 istream& operator>>(istream& in, Point2D& Obj) {
 	in >> Obj.X >> Obj.Y;
 	return in;
@@ -36,6 +41,10 @@ bool isInside(const Point2D& A, const Point2D& B, const Point2D& C, const Point2
 
 	// Calculate area of triangle PAB 
 	double ABP = abs(orientation(A, B, P));
+
+	//check if point is on edges
+	if (ABP == 0 || APC == 0 || PBC == 0)
+		return false;
 
 	// Check if sum of A1, A2and A3 is same as A
 	return (ABC == PBC + APC + ABP);

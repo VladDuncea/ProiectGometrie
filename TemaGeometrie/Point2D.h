@@ -8,6 +8,7 @@ public:
 	double X, Y;
 	Point2D(double X = 0, double Y = 0);
 	Point2D operator=(const Point2D& Obj);
+	bool operator==(const Point2D& Obj);
 	friend istream& operator>>(istream& in, Point2D& Obj);
 	friend ostream& operator<<(ostream& out, const Point2D& Obj);
 };
