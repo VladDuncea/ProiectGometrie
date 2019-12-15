@@ -100,6 +100,10 @@ int main() {
 			}
 		}
 	}
+	Visited.clear();
+	Adjacence.clear();
+	Triangulation.clear();
+	Concaves.clear();
 	Polygon.clear();
 	return 0;
 }
